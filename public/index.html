@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Data Persistence Demo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>My Profile</h1>
+
+<form id="profileForm">
+
+    <label>Username</label>
+    <input
+            id="username"
+            type="text"
+            required
+    >
+
+    <label>Age</label>
+    <input
+            id="age"
+            type="number"
+            required
+    >
+
+    <label>Occupation</label>
+    <input
+            id="occupation"
+            type="text"
+            required
+    >
+
+    <button type="submit">
+        Save Profile
+    </button>
+
+</form>
+
+<p id="message"></p>
+
+
+<script>
+
+    // Load saved data when page opens
+    async function loadProfile() {
+
+        const response = await fetch("/api/profile");
+
+        const profile = await response.json();
+
+        if (profile.username) {
+
+            document.getElementById("username").value =
+                profile.username;
+
+            document.getElementById("age").value =
+                profile.age;
+
+            document.getElementById("occupation").value =
+                profile.occupation;
+        }
+    }
+
+
+    // Save data
+    document
+        .getElementById("profileForm")
+        .addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value;
+
+            const age =
+                document.getElementById("age").value;
+
+            const occupation =
+                document.getElementById("occupation").value;
+
+
+            const response = await fetch(
+                "/api/profile",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username,
+                        age,
+                        occupation
+                    })
+                }
+            );
+
+
+            const result = await response.json();
+
+            document.getElementById("message").textContent =
+                result.message;
+
+        });
+
+
+    // Run when page loads
+    loadProfile();
+
+</script>
+
+</body>
+</html>
