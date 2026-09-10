@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters{
+        boolean(name: "testAuth", defaultvalue: false, desciption: "")
+    }
     stages {
 
         stage("build") {
@@ -9,7 +12,11 @@ pipeline {
             }
         }
         stage("test") {
-
+            when {
+                expression {
+                    params.testAuth == false
+                }
+            }
             steps{
                 echo "running tests"
             }
