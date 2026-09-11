@@ -8,7 +8,8 @@ pipeline {
         stage("build") {
             steps {
                  script{
-                     withCredentials ([name: "dockerhub-creds", userVar: USR, passVar: PWD, description: ""
+                     withCredentials ([
+                     usernamePassword(credentials: "dockerhub-creds", userVar: USR, passVar: PWD)
                      ]) {
                          sh "docker build -t brightdevops/docker-artifact:1.8"
                          sh "dokcer images"
