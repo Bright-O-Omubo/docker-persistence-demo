@@ -6,16 +6,16 @@ pipeline {
     stages {
 
         stage("build") {
-            script{
-                withCredentials ([name: dockerhub-creds, userVar: USR, passVar: PWD, description: ""
-                ]) {
-                sh "docker build -t brightdevops/java-node:1.8"
-                sh "dokcer images"
-                sh "echo ${PWD} | docker login -u ${USR} --password-stdin"
-                sh "docker push brightdevops/java-node:1.8"
-                }
-            }
             steps {
+                 script{
+                     withCredentials ([name: dockerhub-creds, userVar: USR, passVar: PWD, description: ""
+                     ]) {
+                         sh "docker build -t brightdevops/java-node:1.8"
+                         sh "dokcer images"
+                         sh "echo ${PWD} | docker login -u ${USR} --password-stdin"
+                         sh "docker push brightdevops/java-node:1.8"
+                     }
+                 }
                 echo "building artifact"
             }
         }
