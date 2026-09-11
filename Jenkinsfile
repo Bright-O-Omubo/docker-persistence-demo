@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
     parameters{
         booleanParam(name: "testAuth", defaultValue: false, description: "")
@@ -9,10 +9,10 @@ pipeline {
             steps {
                  script{
                      withCredentials ([
-                     usernamePassword(credentials: "dockerhub-creds", userVar: USR, passVar: PWD)
+                     usernamePassword(credentials: "dockerhub-creds", usernameVariable: USR, passwordVariable: PWD)
                      ]) {
                          sh "docker build -t brightdevops/docker-artifact:1.8"
-                         sh "dokcer images"
+                         sh "docker images"
                          sh "echo ${PWD} | docker login -u ${USR} --password-stdin"
                          sh "docker push brightdevops/docker-artifact:1.8"
                      }
