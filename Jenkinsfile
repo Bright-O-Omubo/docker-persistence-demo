@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters{
-        boolean(name: "testAuth", defaultvalue: false, desciption: "")
+        booleanParam(name: "testAuth", defaultvalue: false, desciption: "")
     }
     stages {
 
