@@ -1,11 +1,7 @@
 pipeline {
     agent any
     parameters{
-<<<<<<< HEAD
         booleanParam(name: "testAuth", defaultValue: false, description: "")
-=======
-        booleanParams(name: "testAuth", defaultValue: false, desciption: "")
->>>>>>> 03e4c2c (build mod)
     }
     stages {
 
