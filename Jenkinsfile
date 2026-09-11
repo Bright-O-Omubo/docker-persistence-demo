@@ -7,7 +7,7 @@ pipeline {
 
         stage("build") {
             script{
-                withCredentials([name: dockerhub-creds, userVar: USR, passVar: PWD, description ""
+                withCredentials ([name: dockerhub-creds, userVar: USR, passVar: PWD, description: ""
                 ]) {
                 sh "docker build -t brightdevops/java-node:1.8"
                 sh "dokcer images"
