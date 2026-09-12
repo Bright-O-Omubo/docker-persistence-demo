@@ -9,11 +9,11 @@
             steps {
                  script{
                      withCredentials ([
-                     usernamePassword(credentials: "dockerhub-creds", usernameVariable: USR, passwordVariable: PWD)
+                         usernamePassword(credentials: "dockerhub-creds", usernameVariable: "USER", passwordVariable: "PWD")
                      ]) {
                          sh "docker build -t brightdevops/docker-artifact:1.8"
                          sh "docker images"
-                         sh "echo ${PWD} | docker login -u ${USR} --password-stdin"
+                         sh "echo $PWD | docker login -u $USER --password-stdin"
                          sh "docker push brightdevops/docker-artifact:1.8"
                      }
                  }
