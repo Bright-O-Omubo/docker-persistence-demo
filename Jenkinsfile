@@ -9,7 +9,7 @@
             steps {
                  script{
                      withCredentials ([
-                         usernamePassword(credentials: "dockerhub-creds", usernameVariable: "USER", passwordVariable: "PWD")
+                         usernamePassword(credentialsId: "dockerhub-creds", usernameVariable: "USER", passwordVariable: "PWD")
                      ]) {
                          sh "docker build -t brightdevops/docker-artifact:1.8"
                          sh "docker images"
