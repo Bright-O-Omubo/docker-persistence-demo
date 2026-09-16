@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
      agent any
      tools {
          maven "maven 3.19.0"
@@ -44,4 +44,4 @@
             }
          }
      }
- }
+}
