@@ -36,6 +36,7 @@
                      sh "maven test"
                  }
              }
+         }
          stage("deploy") {
 
             steps {
