@@ -1,3 +1,5 @@
+ @Library ('Jenkins-shareLibrary')_
+
  pipeline {
      agent any
      parameters{
@@ -8,16 +10,9 @@
          stage("build") {
              steps {
                   script{
-                      withCredentials ([
-                          usernamePassword(credentialsId: "dockerhub-creds", usernameVariable: "USER", passwordVariable: "PWD")
-                      ]) {
-                          sh "docker build -t brightdevops/docker-artifact:1.8 ."
-                          sh "docker images"
-                          sh "echo $PWD | docker login -u $USER --password-stdin"
-                          sh "docker push brightdevops/docker-artifact:1.8"
-                      }
+                     echo "building artifact"
+                     imageBuild "brightdevops/docker-artifact:1.9"
                   }
-                 echo "building artifact"
              }
          }
          stage("test") {
@@ -28,7 +23,7 @@
              }
              steps{
                  script{
-                    echo "running tests"
+                    imageTest "brightdevops/docker-artifact:1.9"
                  }
              }
          }
@@ -36,7 +31,9 @@
 
             steps {
 
-                echo "deploying to prod"
+               script{
+                    deployBuild "brightdevops/docker-artifact:1.9"
+               }
             }
          }
      }
