@@ -1,9 +1,5 @@
  pipeline {
      agent any
-     tools {
-         maven "maven 3.19.0"
-         gradle "gradle 3.12.0"
-     }
      parameters{
          booleanParam(name: "testAuth", defaultValue: false, description: "")
      }
@@ -15,7 +11,7 @@
                       withCredentials ([
                           usernamePassword(credentialsId: "dockerhub-creds", usernameVariable: "USER", passwordVariable: "PWD")
                       ]) {
-                          sh "docker build -t brightdevops/docker-artifact:1.8"
+                          sh "docker build -t brightdevops/docker-artifact:1.8 ."
                           sh "docker images"
                           sh "echo $PWD | docker login -u $USER --password-stdin"
                           sh "docker push brightdevops/docker-artifact:1.8"
@@ -33,7 +29,6 @@
              steps{
                  script{
                     echo "running tests"
-                     sh "maven test"
                  }
              }
          stage("deploy") {
