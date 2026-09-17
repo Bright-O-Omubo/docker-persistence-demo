@@ -31,11 +31,12 @@ pipeline {
                  }
              }
              steps{
-                 script{
+                 script {
                     echo "running tests"
                      sh "maven test"
                  }
              }
+         }
          stage("deploy") {
 
             steps {
