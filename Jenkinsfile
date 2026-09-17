@@ -1,8 +1,5 @@
 pipeline {
      agent any
-     tools {
-         maven "maven 3.9.16"
-     }
      parameters{
          booleanParam(name: "testAuth", defaultValue: false, description: "")
      }
