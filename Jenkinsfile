@@ -1,8 +1,7 @@
 pipeline {
      agent any
      tools {
-         maven "maven 3.19.0"
-         gradle "gradle 3.12.0"
+         maven "maven 3.9.16"
      }
      parameters{
          booleanParam(name: "testAuth", defaultValue: false, description: "")
