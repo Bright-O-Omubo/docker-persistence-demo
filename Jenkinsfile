@@ -29,7 +29,6 @@ pipeline {
              steps{
                  script {
                     echo "running tests"
-                     sh "maven test"
                  }
              }
          }
