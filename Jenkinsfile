@@ -23,7 +23,7 @@ pipeline {
              }
              steps{
                  script {
-                    imageBuild "brightdevops/docker-artifact:1.9"
+                    testBuild "brightdevops/docker-artifact:1.9"
                  }
              }
          }
