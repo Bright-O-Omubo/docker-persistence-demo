@@ -11,7 +11,7 @@
              steps {
                   script{
                      echo "building artifact"
-                     imageBuild "brightdevops/docker-artifact:1.9"
+                     imageBuild "brightdevops/docker-artifact:2.0"
                   }
              }
          }
@@ -23,16 +23,22 @@
              }
              steps{
                  script{
-                    testBuild "brightdevops/docker-artifact:1.9"
+                    testBuild "brightdevops/docker-artifact:2.0"
                  }
              }
          }
          stage("deploy") {
+            when {
+                expression {
+
+                    BRANCH_NAME = "main"
+                }
+            }
 
             steps {
 
                script{
-                    deployBuild "brightdevops/docker-artifact:1.9"
+                    deployBuild "brightdevops/docker-artifact:2.0"
                }
             }
          }
