@@ -23,6 +23,7 @@ pipeline {
              }
              steps{
                  script {
+                    echo "testing github webhook"
                     testBuild "brightdevops/docker-artifact:2.0"
                  }
              }
