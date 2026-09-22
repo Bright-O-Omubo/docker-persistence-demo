@@ -11,7 +11,7 @@
              steps {
                   script{
                      echo "building artifact"
-                     imageBuild "brightdevops/docker-artifact:2.0"
+                     imageBuild ("brightdevops/docker-artifact:2.0")
                   }
              }
          }
@@ -23,7 +23,7 @@
              }
              steps{
                  script{
-                    testBuild "brightdevops/docker-artifact:2.0"
+                    testBuild ("brightdevops/docker-artifact:2.0")
                  }
              }
          }
@@ -38,7 +38,7 @@
             steps {
 
                script{
-                    deployBuild "brightdevops/docker-artifact:2.0"
+                    deployBuild ("brightdevops/docker-artifact:2.0")
                }
             }
          }
